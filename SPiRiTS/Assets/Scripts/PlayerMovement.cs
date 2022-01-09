@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private KeyCode runButton = KeyCode.LeftShift;
     [SerializeField] private KeyCode jumpButton = KeyCode.Space;
-    [SerializeField] private KeyCode attackButton = KeyCode.Mouse0;
+    // [SerializeField] private KeyCode attackButton = KeyCode.Mouse0;
 
     private float turnSmoothVelocity;
     private Vector3 velocity;
@@ -45,10 +45,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKeyDown(attackButton) && anim.GetLayerWeight(anim.GetLayerIndex("Attack Layer")) == 0)
+        /*if (Input.GetKeyDown(attackButton) && anim.GetLayerWeight(anim.GetLayerIndex("Attack Layer")) == 0)
         {
             StartCoroutine(Attack());
-        }
+        }*/
     }
 
 
@@ -127,12 +127,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private IEnumerator Attack()
+    /*private IEnumerator Attack()
     {
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
         anim.SetTrigger("Attack");
 
         yield return new WaitForSeconds(0.9f);
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
-    }
+    }*/
 }
