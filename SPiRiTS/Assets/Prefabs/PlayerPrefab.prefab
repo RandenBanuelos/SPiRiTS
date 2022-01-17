@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1617793175155846992}
   - component: {fileID: 5805693494073674855}
   - component: {fileID: 2271451979378335877}
-  - component: {fileID: 7439267248682256387}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -90,6 +89,8 @@ MonoBehaviour:
     m_Bits: 128
   attackRange: 0.5
   attackDamage: 40
+  bullet: {fileID: 1885998567977185013, guid: 9351f5ff45fb91548a3471ce3ec624f9, type: 3}
+  isRanged: 1
 --- !u!114 &5805693494073674855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +113,6 @@ MonoBehaviour:
   gravity: -9.81
   animDampTime: 0.1
   turnSmoothTime: 0.1
-  combat: {fileID: 0}
 --- !u!114 &2271451979378335877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,24 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMesh: {fileID: 164248668572794115}
---- !u!114 &7439267248682256387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4260172317984637885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 393cdf7a3b7c3844e9e02d70b5ecec36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPoint: {fileID: 7959870846850634015}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  attackRange: 0.5
-  attackDamage: 40
 --- !u!1 &4377843697368151982
 GameObject:
   m_ObjectHideFlags: 0
