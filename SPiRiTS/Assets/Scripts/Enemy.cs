@@ -6,8 +6,30 @@ public class Enemy : MonoBehaviour
 {
     // VARIABLES
     [SerializeField] private Animator anim;
-    [SerializeField] private int maxHealth = 100;
 
+    //   Enemy Descriptions
+    [SerializeField] private string name = "";
+    [SerializeField] private string description = "";
+
+    //   Enemy Stats
+    [SerializeField] private int maxHealth = 0;
+    [SerializeField] private int defense = 0;
+    [SerializeField] private int attack = 0;
+
+    //   Enemy Items
+    //[SerializeField] private Weapon equippedWeapon;
+    //[SerializeField] private Armor equippedArmor;
+    [SerializeField] bool usesWeapon = false;
+    [SerializeField] bool usesArmor = false;
+
+    //   Enemy weaknesses and resistances
+    //[SerializeField] private List<Element> weaknesses = new List<Element>();
+    //[SerializeField] private List<Element> resistances = new List<Element>();
+
+    //   Enemy Dropped items
+    [SerializeField] private List<DroppedItem> drops = new List<DroppedItem>();
+
+    //   Current life state
     private bool isDead;
 
 
