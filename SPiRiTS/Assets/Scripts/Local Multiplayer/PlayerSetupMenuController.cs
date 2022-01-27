@@ -11,8 +11,10 @@ public class PlayerSetupMenuController : MonoBehaviour
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject readyPanel;
     [SerializeField] private Button readyButton;
+    [SerializeField] private Image controllerIcon;
+    [SerializeField] private List<Sprite> icons;
 
-    private float ignoreInputTime = 1.5f;
+    private float ignoreInputTime = 0.5f;
     private bool inputEnabled;
 
 
@@ -22,11 +24,25 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     // FUNCTIONS
 
-    public void SetPlayerIndex(int pi)
+    public void SetPlayerIndex(int pi, string scheme)
     {
         PlayerIndex = pi;
         titleText.SetText("Player #" + (pi + 1).ToString());
+        SetControllerIcon(scheme);
         ignoreInputTime = Time.time + ignoreInputTime;
+    }
+
+
+    private void SetControllerIcon(string scheme)
+    {
+        if (scheme == "Keyboard Mouse")
+            controllerIcon.sprite = icons[0];
+        if (scheme == "Switch Pro Controller")
+            controllerIcon.sprite = icons[1];
+        if (scheme == "PS4 Controller")
+            controllerIcon.sprite = icons[2];
+        if (scheme == "Xbox Controller" || scheme == "Generic Controller")
+            controllerIcon.sprite = icons[3];
     }
 
 

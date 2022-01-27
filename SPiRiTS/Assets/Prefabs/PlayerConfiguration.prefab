@@ -57,7 +57,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
@@ -74,5 +74,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28970b8d09626e4f9e29737a3ecada2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSetupMenuPrefab: {fileID: 405655366793337068, guid: 8fa807df4859dd44a8fd640e72de3337, type: 3}
+  playerSetupMenuPrefab: {fileID: 347408849024916787, guid: 40428157a221f204d99b53fb401ff419, type: 3}
   input: {fileID: 4074105799283714411}

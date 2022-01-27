@@ -33,6 +33,11 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     
+    public int GetPlayerIndex()
+    {
+        return playerConfig.PlayerIndex;
+    }
+
 
     private void Input_onActionTriggered(CallbackContext obj)
     {
@@ -53,6 +58,26 @@ public class PlayerInputHandler : MonoBehaviour
             else if (obj.action.name == controls.PlayerMovement.Attack.name)
             {
                 OnAttack(obj);
+            }
+            else if (obj.action.name == controls.PlayerMovement.UseSpell.name)
+            {
+                OnItemUsed(obj, 0);
+            }
+            else if (obj.action.name == controls.PlayerMovement.UseItem1.name)
+            {
+                OnItemUsed(obj, 1);
+            }
+            else if (obj.action.name == controls.PlayerMovement.UseItem2.name)
+            {
+                OnItemUsed(obj, 2);
+            }
+            else if (obj.action.name == controls.PlayerMovement.UseItem3.name)
+            {
+                OnItemUsed(obj, 3);
+            }
+            else if (obj.action.name == controls.PlayerMovement.UseUltimate.name)
+            {
+                OnItemUsed(obj, 4);
             }
         }      
     }
@@ -82,5 +107,11 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnAttack(CallbackContext context)
     {
         mover.AttemptAttack();
+    }
+
+
+    public void OnItemUsed(CallbackContext context, int slotNumber)
+    {
+        mover.GetInventory().Slots[slotNumber].UseItem();
     }
 }

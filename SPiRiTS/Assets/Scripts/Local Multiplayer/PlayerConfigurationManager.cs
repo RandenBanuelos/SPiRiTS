@@ -13,16 +13,15 @@ public class PlayerConfigurationManager : MonoBehaviour
     [SerializeField] private int MaxPlayers = 2;
 
     // Singleton instance
+    #region Singleton
     public static PlayerConfigurationManager Instance { get; private set; }
-
-
-    // FUNCTIONS
 
     private void Awake()
     {
         if (Instance != null)
         {
-            Debug.Log("SINGLETON - Trying to create another instance of singleton!");
+            Debug.Log("PLAYER_CONFIGURATION_MANAGER SINGLETON - Trying to create another instance of singleton!");
+            Destroy(gameObject);
         }
         else
         {
@@ -31,11 +30,22 @@ public class PlayerConfigurationManager : MonoBehaviour
             playerConfigs = new List<PlayerConfiguration>();
         }
     }
-
+    #endregion
 
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
         return playerConfigs;
+    }
+
+
+    public void ResetSession()
+    {
+        for (int i = 0; i < playerConfigs.Count; i++)
+        {
+            Destroy(playerConfigs[i].Input);
+        }
+
+        playerConfigs.Clear();
     }
 
 
@@ -49,7 +59,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         playerConfigs[index].IsReady = true;
 
-        if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.IsReady == true))
+        if (playerConfigs.All(p => p.IsReady == true))
         {
             SceneManager.LoadScene("Sandbox");
         }
@@ -58,9 +68,11 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
+        Debug.Log(pi.currentControlScheme);
+
         Debug.Log("Player #" + pi.playerIndex + " Joined!");
 
-        if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+        if (playerConfigs.Count + 1 <= MaxPlayers && !playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
         {
             pi.transform.SetParent(transform);
             playerConfigs.Add(new PlayerConfiguration(pi));
