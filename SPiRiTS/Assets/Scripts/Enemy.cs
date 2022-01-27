@@ -1,127 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    // VARIABLES  
-
-    [Header("Descriptors")]
-    [SerializeField] private string charName = "";
-    // [SerializeField] private string description = "";
-
-
-    [Header("Stats")]
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int defense = 0;
-    // [SerializeField] private int attack = 0;
-
+    // VARIABLES
     [SerializeField] private Animator anim;
-    [SerializeField] private Combat combat;
-    [SerializeField] private HealthBar healthBar;
-    [SerializeField] private Canvas textUI;
 
+    //   Enemy Descriptions
+    [SerializeField] private string name = "";
+    [SerializeField] private string description = "";
 
-    [Header("Weapon & Armor")]
-    // [SerializeField] private Weapon equippedWeapon;
-    [SerializeField] private Armor equippedArmor;
-    // [SerializeField] bool usesWeapon = false;
+    //   Enemy Stats
+    [SerializeField] private int maxHealth = 0;
+    [SerializeField] private int defense = 0;
+    [SerializeField] private int attack = 0;
+
+    // Enemy Health UI
+    [SerializeField] private Slider m_Slider;
+    [SerializeField] private Image m_FillImage;
+    [SerializeField] private Color m_FullHealthColor = Color.green;
+    [SerializeField] private Color m_ZeroHealthColor = Color.red;
+
+    //   Enemy Items
+    //[SerializeField] private Weapon equippedWeapon;
+    //[SerializeField] private Armor equippedArmor;
+    [SerializeField] bool usesWeapon = false;
     [SerializeField] bool usesArmor = false;
 
+    //   Enemy weaknesses and resistances
+    //[SerializeField] private List<Element> weaknesses = new List<Element>();
+    //[SerializeField] private List<Element> resistances = new List<Element>();
 
-    [Header("Weaknesses & Resistances")]
-    [SerializeField] List<Modifier> weakList = new List<Modifier>();
-    [SerializeField] List<Modifier> resistList = new List<Modifier>();
+    //   Enemy Dropped items
+    [SerializeField] private List<DroppedItem> drops = new List<DroppedItem>();
 
-
-    // [Header("Dropped Items")]
-    // [SerializeField] private List<DroppedItem> drops = new List<DroppedItem>();
-
-
-    [Header("Dissolve Material")]
-    [SerializeField] private Material baseMaterial;
-    [SerializeField] private float fadeTime = 3f;
+    //   Current life state
+    private bool isDead;
 
 
     // REFERENCES
     private int currentHealth;
-    private bool isDead;
-
-    private Dictionary<ElementType, float> weaknesses;
-    private Dictionary<ElementType, float> resistances;
-
-    // Dissolve material references
-    private SkinnedMeshRenderer[] meshes;
-    private Material materialInstance;
-    private float currentFade = -1.5f;
 
 
     // FUNCTIONS
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         isDead = false;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
-        textUI.GetComponentInChildren<TMP_Text>().text = charName;
-
-        meshes = GetComponentsInChildren<SkinnedMeshRenderer>();
-
-        materialInstance = Instantiate<Material>(baseMaterial);
-
-        foreach (SkinnedMeshRenderer mesh in meshes)
-        {
-            mesh.material = materialInstance;
-        }
-
-        weaknesses = new Dictionary<ElementType, float>();
-        resistances = new Dictionary<ElementType, float>();
-
-        for (int i = 0; i < weakList.Count; i++)
-            weaknesses.Add(weakList[i].Element, weakList[i].Mod);
-
-        for (int i = 0; i < resistList.Count; i++)
-            resistances.Add(resistList[i].Element, resistList[i].Mod);
     }
 
 
-    private void Update()
-    {
-        if (isDead)
-        {
-            if (currentFade < fadeTime)
-            {
-                currentFade += Time.deltaTime;
-
-                if (currentFade > 0)
-                    materialInstance.SetFloat("_Fade", currentFade / fadeTime);
-            }
-            else
-            {
-                materialInstance.SetFloat("_Fade", 1f);
-                //Destroy(this);
-                this.gameObject.SetActive(false);
-            }
-        }
-    }
-
-
-    public bool IsDead => isDead;
-
-
-    // Defending
-    public void TakeDamage(int damage, ElementType element = ElementType.None)
+    public void TakeDamage(int damage)
     {
         if (!isDead)
         {
-            int finalDamage = CalculateDamageTaken(damage, element) - defense;
-            if (finalDamage > 0)
-            {
-                anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
-                currentHealth -= finalDamage;
-                healthBar.SetHealth(currentHealth);
-            }
+            currentHealth -= damage;
+            SetHealthUI();
 
             if (currentHealth <= 0)
             {
@@ -134,61 +72,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
-    private int CalculateDamageTaken(int damage, ElementType element)
+    private void SetHealthUI()
     {
-        float finalDamage = damage;
-        float weakMultiplier = 1f;
-        float resistMultiplier = 1f;
+        // Adjust the value and colour of the slider.
+        m_Slider.value = currentHealth;
 
-        if (usesArmor && equippedArmor != null)
-        {
-            if (equippedArmor.Weaknesses.ContainsKey(element))
-                weakMultiplier *= equippedArmor.Weaknesses[element];
-            else if (equippedArmor.Resistances.ContainsKey(element))
-                resistMultiplier *= equippedArmor.Resistances[element];
-        }
-
-
-        if (weaknesses.ContainsKey(element))
-            weakMultiplier *= weaknesses[element];
-        else if (resistances.ContainsKey(element))
-            resistMultiplier *= resistances[element];
-
-        finalDamage *= weakMultiplier;
-        finalDamage *= resistMultiplier;
-
-        return Mathf.RoundToInt(finalDamage);
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, currentHealth / maxHealth);
     }
-
 
     private void Die()
     {
         isDead = true;
         anim.SetTrigger("Die");
-        healthBar.gameObject.SetActive(false);
-        textUI.gameObject.SetActive(false);
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         Physics.IgnoreCollision(GetComponent<Collider>(), playerObj.GetComponent<Collider>());
     }
 
 
-    public IEnumerator Attack()
-    {
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
-        anim.SetTrigger("Attack");
-
-        yield return new WaitForSeconds(.7f);
-        combat.Attack();
-
-        yield return new WaitForSeconds(1.5f);
-        ResetAttackLayer();
-    }
-
-
-    private void ResetAttackLayer()
-    {
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
-    }
 }
