@@ -32,7 +32,7 @@ public class InventoryUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log($"Updating UI for Player #{playerIndex}...");
+        Debug.Log($"Updating UI for Player #{playerIndex + 1}...");
 
         Dictionary<Item, int> playerInventory = inventory.GetPlayerInventory(playerIndex);
 

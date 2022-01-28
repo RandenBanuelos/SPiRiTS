@@ -102,6 +102,19 @@ public class Mover : MonoBehaviour
     }
 
 
+    public int CurrentHealth => currentHealth;
+
+
+    public int MaxHealth => maxHealth;
+
+
+    public void SetCurrentHealth(int amount)
+    {
+        currentHealth = amount;
+        healthBar.SetHealth(amount);
+    }
+
+
     public void SetHealthBar(HealthBar bar)
     {
         healthBar = bar;

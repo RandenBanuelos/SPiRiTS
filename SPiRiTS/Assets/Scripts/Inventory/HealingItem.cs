@@ -9,6 +9,14 @@ public class HealingItem : Item
     [SerializeField] private int healthRestored = 0;
     [SerializeField] private bool healsMax = false;
 
+    public override void Use()
+    {
+        base.Use();
+
+        int amount = Mathf.Clamp(Owner.CurrentHealth + healthRestored, Owner.CurrentHealth, Owner.MaxHealth);
+        Owner.SetCurrentHealth(amount);
+    }
+
 
     public int HealthRestored => healthRestored;
     public bool HealsMax => healsMax;

@@ -16,6 +16,7 @@ public class ItemPickup : Interactable
     {
         int playerIndex = player.GetComponent<PlayerInputHandler>().GetPlayerIndex();
         item.SetIndex(playerIndex);
+        item.SetPlayerOwner(player.GetComponent<Mover>());
 
         Inventory.Instance.Add(item, playerIndex);
 

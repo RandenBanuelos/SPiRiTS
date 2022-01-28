@@ -10,15 +10,16 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private TMP_Text cooldownTimerText;
 
     Item item;
-    private Color originalIconColor;
-    private Color originalBackgroundColor;
     private float currentTimer = 0f;
     private bool canUse = true;
+    private bool needsText = true;
+    private int amountInt;
+    private Inventory inventory;
 
 
     private void Start()
     {
-        originalBackgroundColor = background.color;
+        inventory = Inventory.Instance;
     }
 
 
@@ -34,7 +35,8 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                cooldownTimerText.text = currentTimer.ToString("F1");
+                if (needsText)
+                    cooldownTimerText.text = currentTimer.ToString("F1");
             }
         }
     }
@@ -42,16 +44,13 @@ public class InventorySlot : MonoBehaviour
 
     public void AddItem(Item newItem, int count)
     {
-        if (item != null)
-        {
-            item = newItem;
+        amountInt = count;
+        amount.text = amountInt.ToString();
 
-            icon.sprite = newItem.Icon;
-            icon.gameObject.SetActive(true);
-            originalIconColor = icon.color;
-        }    
+        item = newItem;
 
-        amount.text = count.ToString();
+        icon.gameObject.SetActive(true);
+        icon.sprite = newItem.Icon;
     }
 
 
@@ -70,8 +69,24 @@ public class InventorySlot : MonoBehaviour
     {
         if (canUse)
         {
-            item?.Use();
-            StartCooldown();
+            if (item != null)
+            {
+                item.Use();
+                int remaining = amountInt - 1;
+
+                if (remaining > 0)
+                {
+                    inventory.Remove(item, item.PlayerIndex);
+                    StartCooldown();
+                }
+                else
+                {
+                    Item tempItem = item;
+                    ClearSlot();
+                    inventory.Remove(tempItem, tempItem.PlayerIndex);
+                    RemovedItemCooldown();
+                }
+            }
         }
     }
 
@@ -82,6 +97,7 @@ public class InventorySlot : MonoBehaviour
         icon.color = Color.gray;
         background.color = Color.gray;
 
+        amount.text = amountInt.ToString();
         currentTimer = item.CooldownTimer;
 
         cooldownTimerText.text = currentTimer.ToString();
@@ -91,11 +107,20 @@ public class InventorySlot : MonoBehaviour
     public void EndCooldown()
     {
         canUse = true;
-        icon.color = originalIconColor;
-        background.color = originalBackgroundColor;
+        needsText = true;
+        icon.color = Color.white;
+        background.color = Color.white;
 
         currentTimer = 0f;
 
         cooldownTimerText.text = "";
+    }
+
+
+    public void RemovedItemCooldown()
+    {
+        canUse = false;
+        needsText = false;
+        currentTimer = .1f;
     }
 }

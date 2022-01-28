@@ -9,6 +9,7 @@ public class Item : ScriptableObject
     [SerializeField] private bool isDefaultItem = false;
 
     private int playerIndex = 0;
+    private Mover owner;
 
 
     public string ItemName => itemName;
@@ -22,6 +23,8 @@ public class Item : ScriptableObject
     public float CooldownTimer => cooldownTimer;
 
     public int PlayerIndex => playerIndex;
+
+    public Mover Owner => owner;
 
     public virtual void Use()
     {
@@ -39,5 +42,11 @@ public class Item : ScriptableObject
     public void SetIndex(int index)
     {
         playerIndex = index;
+    }
+
+
+    public void SetPlayerOwner(Mover mover)
+    {
+        owner = mover;
     }
 }
