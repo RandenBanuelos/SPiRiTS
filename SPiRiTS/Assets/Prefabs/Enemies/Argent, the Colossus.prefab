@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 1527078066386183597}
   - component: {fileID: 1527078066386183599}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Argent, the Colossus
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -979,7 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cb89f92a0788e438921a03c1aec42a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charName: Squire
+  charName: Argent, the Colossus
   maxHealth: 100
   defense: 0
   anim: {fileID: 1527078066276484694}

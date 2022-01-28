@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b04bb69f1eb6e0943b323ea11ea814bb, type: 3}
-  m_Name: Weak Potion
+  m_Name: Cleric Water
   m_EditorClassIdentifier: 
-  itemName: Weak Potion
-  description: A diluted potion that heals a small amount of health.
-  icon: {fileID: 21300000, guid: 8c3c2e21ec807466c86af52596b11ebd, type: 3}
-  cooldownTimer: 5
+  itemName: Cleric Water
+  description: Blessed water that heals a moderate amount of health.
+  icon: {fileID: 21300000, guid: e5eda4650a73e4f08aa6d7ec6a8151d6, type: 3}
+  cooldownTimer: 7
   isDefaultItem: 0
-  healthRestored: 10
+  healthRestored: 15
   healsMax: 0

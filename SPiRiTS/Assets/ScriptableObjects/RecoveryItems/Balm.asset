@@ -17,5 +17,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 77f099b5da1e44e4d986b23eae4db4dd, type: 3}
   cooldownTimer: 3
   isDefaultItem: 0
-  healthRestored: 10
+  healthRestored: 5
   healsMax: 0

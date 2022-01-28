@@ -42,6 +42,9 @@ public class InventorySlot : MonoBehaviour
     }
 
 
+    public Item Item => item;
+
+
     public void AddItem(Item newItem, int count)
     {
         amountInt = count;
@@ -82,7 +85,7 @@ public class InventorySlot : MonoBehaviour
                 else
                 {
                     Item tempItem = item;
-                    ClearSlot();
+                    // ClearSlot();
                     inventory.Remove(tempItem, tempItem.PlayerIndex);
                     RemovedItemCooldown();
                 }
@@ -121,6 +124,6 @@ public class InventorySlot : MonoBehaviour
     {
         canUse = false;
         needsText = false;
-        currentTimer = .1f;
+        currentTimer = .5f;
     }
 }

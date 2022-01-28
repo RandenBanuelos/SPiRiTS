@@ -107,7 +107,7 @@ MonoBehaviour:
   gravity: -9.81
   animDampTime: 0.1
   turnSmoothTime: 0.1
-  maxHealth: 100
+  maxHealth: 30
   defense: 0
   playerHUD: {fileID: 1888277209470768684}
   equippedArmor: {fileID: 0}

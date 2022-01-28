@@ -13,8 +13,15 @@ public class HealingItem : Item
     {
         base.Use();
 
-        int amount = Mathf.Clamp(Owner.CurrentHealth + healthRestored, Owner.CurrentHealth, Owner.MaxHealth);
-        Owner.SetCurrentHealth(amount);
+        if (healsMax)
+        {
+            Owner.SetCurrentHealth(Owner.MaxHealth);
+        }
+        else
+        {
+            int amount = Mathf.Clamp(Owner.CurrentHealth + healthRestored, Owner.CurrentHealth, Owner.MaxHealth);
+            Owner.SetCurrentHealth(amount);
+        }        
     }
 
 
