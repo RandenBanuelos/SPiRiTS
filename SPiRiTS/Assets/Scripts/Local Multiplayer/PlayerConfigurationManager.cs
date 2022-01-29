@@ -9,6 +9,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 {
     // VARIABLES
     private List<PlayerConfiguration> playerConfigs;
+    private PlayerInputManager inputManager;
 
     [SerializeField] private int MaxPlayers = 2;
 
@@ -28,6 +29,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(Instance);
             playerConfigs = new List<PlayerConfiguration>();
+            inputManager = GetComponent<PlayerInputManager>();
         }
     }
     #endregion
@@ -35,6 +37,18 @@ public class PlayerConfigurationManager : MonoBehaviour
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
         return playerConfigs;
+    }
+
+
+    public void DisableJoin()
+    {
+        inputManager.DisableJoining();
+    }
+
+
+    public void EnableJoin()
+    {
+        inputManager.EnableJoining();
     }
 
 

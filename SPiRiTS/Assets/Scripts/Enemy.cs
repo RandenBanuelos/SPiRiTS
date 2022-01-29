@@ -5,14 +5,14 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
-    // VARIABLES  
-
+    // VARIABLES
     [Header("Descriptors")]
     [SerializeField] private string charName = "";
     // [SerializeField] private string description = "";
 
 
     [Header("Stats")]
+    [SerializeField] private bool isBoss = false;
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int defense = 0;
     // [SerializeField] private int attack = 0;
@@ -52,6 +52,8 @@ public class Enemy : MonoBehaviour
     private Dictionary<ElementType, float> resistances;
 
     // Dissolve material references
+    private GameManager manager;
+
     private SkinnedMeshRenderer[] meshes;
     private Material materialInstance;
     private float currentFade = -1.5f;
@@ -83,6 +85,11 @@ public class Enemy : MonoBehaviour
 
         for (int i = 0; i < resistList.Count; i++)
             resistances.Add(resistList[i].Element, resistList[i].Mod);
+
+        manager = GameManager.Instance;
+
+        if (isBoss)
+            manager.AddInstantiatedBoss(this);
     }
 
 
@@ -100,7 +107,10 @@ public class Enemy : MonoBehaviour
             else
             {
                 materialInstance.SetFloat("_Fade", 1f);
-                //Destroy(this);
+
+                if (isBoss)
+                    manager.AddDeadBoss(this);
+
                 this.gameObject.SetActive(false);
             }
         }
@@ -167,7 +177,7 @@ public class Enemy : MonoBehaviour
         isDead = true;
         anim.SetTrigger("Die");
         healthBar.gameObject.SetActive(false);
-        textUI.gameObject.SetActive(false);
+        textUI.gameObject.SetActive(false);     
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         Physics.IgnoreCollision(GetComponent<Collider>(), playerObj.GetComponent<Collider>());

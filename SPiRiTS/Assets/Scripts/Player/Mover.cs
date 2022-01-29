@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    // VARIABLES
+    // VARIABLES 
     [Header("General")]
     [SerializeField] private float speed = 6f;
     [SerializeField] private float sprintMultiplier = 1.2f;
@@ -42,6 +42,8 @@ public class Mover : MonoBehaviour
 
 
     // REFERENCES
+    private GameManager manager;
+
     private CharacterController controller;
     private Animator anim;
     private float initialSpeed;
@@ -69,9 +71,6 @@ public class Mover : MonoBehaviour
         initialSpeed = speed;
         currentHealth = maxHealth;
 
-        healthBar = playerHUD.GetComponentInChildren<HealthBar>();
-        healthBar.SetMaxHealth(maxHealth);
-
         weaknesses = new Dictionary<ElementType, float>();
         resistances = new Dictionary<ElementType, float>();
 
@@ -80,6 +79,10 @@ public class Mover : MonoBehaviour
 
         for (int i = 0; i < resistList.Count; i++)
             resistances.Add(resistList[i].Element, resistList[i].Mod);
+
+        manager = GameManager.Instance;
+
+        manager.AddInstantiatedPlayer(this);
     }
 
 
@@ -93,6 +96,8 @@ public class Mover : MonoBehaviour
     {
         playerHUD = hud;
         playerHUD.GetComponent<InventoryUI>().SetPlayerIndex(GetComponent<PlayerInputHandler>().GetPlayerIndex());
+        healthBar = playerHUD.GetComponentInChildren<HealthBar>();
+        healthBar.SetMaxHealth(maxHealth);
     }
 
 
@@ -106,6 +111,9 @@ public class Mover : MonoBehaviour
 
 
     public int MaxHealth => maxHealth;
+
+
+    public bool IsDead => isDead;
 
 
     public void SetCurrentHealth(int amount)
@@ -275,9 +283,10 @@ public class Mover : MonoBehaviour
         anim.SetTrigger("Die");
         playerHUD.gameObject.SetActive(false);
 
-        // GameObject playerObj = GameObject.FindGameObjectWithTag("Enemy");
-        // Physics.IgnoreCollision(GetComponent<Collider>(), playerObj.GetComponent<Collider>());
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Enemy");
+        Physics.IgnoreCollision(GetComponent<Collider>(), playerObj.GetComponent<Collider>());
 
-        // this.gameObject.SetActive(false);
+        Debug.Log("Got to the point.");
+        manager.AddDeadPlayer(this);
     }
 }

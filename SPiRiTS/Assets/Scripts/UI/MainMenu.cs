@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        PlayerConfigurationManager.Instance?.EnableJoin();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

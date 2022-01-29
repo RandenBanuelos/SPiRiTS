@@ -9,6 +9,9 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
+    public delegate void OnInventoryCleared();
+    public OnInventoryCleared onInventoryCleared;
+
     // Singleton instance
     #region Singleton
     public static Inventory Instance { get; private set; }
@@ -33,6 +36,13 @@ public class Inventory : MonoBehaviour
     public void AddNewPlayerInventory()
     {
         items.Add(new Dictionary<Item, int>());
+    }
+
+
+    public void ResetInventory()
+    {
+        items.Clear();
+        onInventoryCleared?.Invoke();
     }
 
 

@@ -20,6 +20,7 @@ public class ItemPickup : Interactable
 
         Inventory.Instance.Add(item, playerIndex);
 
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
+        // Destroy(gameObject);
     }
 }

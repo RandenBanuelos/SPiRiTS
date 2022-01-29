@@ -85,7 +85,6 @@ public class InventorySlot : MonoBehaviour
                 else
                 {
                     Item tempItem = item;
-                    // ClearSlot();
                     inventory.Remove(tempItem, tempItem.PlayerIndex);
                     RemovedItemCooldown();
                 }

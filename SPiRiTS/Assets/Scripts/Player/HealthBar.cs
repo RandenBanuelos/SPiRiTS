@@ -10,7 +10,9 @@ public class HealthBar : MonoBehaviour
 
     public void SetMaxHealth(int health)
     {
+        Debug.Log("Set max health to " + health);
         slider.maxValue = health;
+        Debug.Log("Set to " + slider.maxValue);
         slider.value = health;
     }
 

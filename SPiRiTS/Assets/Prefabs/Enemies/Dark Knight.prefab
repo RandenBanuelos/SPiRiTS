@@ -164,19 +164,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2039200454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116770536445443149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba2bb4e2ab3ff4fbf7a130183ffe7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &1527078065939235656
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Dark Knight
+  isBoss: 0
   maxHealth: 30
   defense: 0
   anim: {fileID: 1527078066276484694}
@@ -1009,7 +997,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackRange: 0.5
-  attackDamage: 40
+  attackDamage: 8
   bullet: {fileID: 1885998567977185013, guid: 9351f5ff45fb91548a3471ce3ec624f9, type: 3}
   isRanged: 0
 --- !u!114 &1527078066276483498
@@ -3116,11 +3104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82f1b41cabd8754188a797454bfb3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &116770536445443149 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8721984946553042030, guid: b190c5dceed0f004db023bb75132ef55, type: 3}
-  m_PrefabInstance: {fileID: 8688689660380497955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &116770536445443137 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8721984946553042018, guid: b190c5dceed0f004db023bb75132ef55, type: 3}

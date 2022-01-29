@@ -16,6 +16,7 @@ public class InventoryUI : MonoBehaviour
     {
         inventory = Inventory.Instance;
         inventory.onItemChangedCallback += UpdateUI;
+        inventory.onInventoryCleared += ClearAllSlots;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     }
@@ -50,5 +51,15 @@ public class InventoryUI : MonoBehaviour
                 currentSlot.ClearSlot();
             }
         }
+    }
+
+
+    public void ClearAllSlots()
+    {
+        for (int i = 0; i < slots.Length; i++)
+            slots[i].ClearSlot();
+
+        inventory.onItemChangedCallback -= UpdateUI;
+        inventory.onInventoryCleared -= ClearAllSlots;
     }
 }

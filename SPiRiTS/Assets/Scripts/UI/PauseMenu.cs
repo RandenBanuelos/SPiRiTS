@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
+    [SerializeField] private GameObject winMenuUI;
+    [SerializeField] private GameObject loseMenuUI;
     [SerializeField] private GameObject pauseMenuUI;
-    [SerializeField] private string menuSceneName;
+
+    [SerializeField] private Button pauseTopButton;
+    [SerializeField] private Button winTopButton;
+    [SerializeField] private Button loseTopButton;
+
+    [SerializeField] private string mainMenuSceneName;
+    [SerializeField] private string playerSelectSceneName;
 
     private PauseControls controls;
+    private GameManager manager;
 
 
     // FUNCTIONS
@@ -18,6 +28,7 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         controls = new PauseControls();
+        manager = GameManager.Instance;
     }
 
 
@@ -36,6 +47,8 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         controls.Pause.PauseGame.started += _ => DeterminePause();
+        manager.onAllPlayersDead += Lose;
+        manager.onAllBossesDead += Win;
     }
 
 
@@ -48,6 +61,26 @@ public class PauseMenu : MonoBehaviour
     }
 
 
+    private void Lose()
+    {
+        Debug.Log("Game lost...");
+        loseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+        loseTopButton.Select();
+    }
+
+
+    private void Win()
+    {
+        Debug.Log("Game won!");
+        winMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+        winTopButton.Select();
+    }
+
+
     public void Resume()
     {
         Debug.Log("Resumed game!");
@@ -57,23 +90,56 @@ public class PauseMenu : MonoBehaviour
     }
 
 
-    public void Pause()
+    private void Pause()
     {
         Debug.Log("Paused game!");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        pauseTopButton.Select();
     }
 
 
-    public void LoadMenu()
+    public void LoadPlayerSelect() // TODO: Combine this and LoadMainMenu()
     {
         Debug.Log("Returning to player setup screen!");
         Time.timeScale = 1f;
+
+        GameManager.Instance.ResetGameManager();
         PlayerConfigurationManager.Instance.ResetSession();
+        Inventory.Instance.ResetInventory();
+
         pauseMenuUI.SetActive(false);
+        loseMenuUI.SetActive(false);
         GameIsPaused = false;
-        SceneManager.LoadScene(menuSceneName);
+
+        controls.Pause.PauseGame.started -= _ => DeterminePause();
+        manager.onAllPlayersDead -= Lose;
+        manager.onAllBossesDead -= Win;
+
+        SceneManager.LoadScene(playerSelectSceneName);
+    }
+
+
+    public void LoadMainMenu()
+    {
+        Debug.Log("Returning to main menu!");
+        Time.timeScale = 1f;
+
+        GameManager.Instance.ResetGameManager();
+        PlayerConfigurationManager.Instance.ResetSession();
+        Inventory.Instance.ResetInventory();
+
+        PlayerConfigurationManager.Instance.DisableJoin();
+
+        winMenuUI.SetActive(false);
+        GameIsPaused = false;
+
+        controls.Pause.PauseGame.started -= _ => DeterminePause();
+        manager.onAllPlayersDead -= Lose;
+        manager.onAllBossesDead -= Win;
+
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
 
