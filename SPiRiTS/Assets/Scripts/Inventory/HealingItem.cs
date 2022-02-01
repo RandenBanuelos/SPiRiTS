@@ -15,13 +15,11 @@ public class HealingItem : Item
 
         if (healsMax)
         {
-            Debug.Log("Healed max health");
             Owner.SetCurrentHealth(Owner.MaxHealth);
         }
         else
         {
             int amount = Mathf.Clamp(Owner.CurrentHealth + healthRestored, Owner.CurrentHealth, Owner.MaxHealth);
-            Debug.Log("Healed " + amount + " health");
             Owner.SetCurrentHealth(amount);
         }        
     }

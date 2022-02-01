@@ -3,6 +3,14 @@ using UnityEngine;
 public class ItemPickup : Interactable
 {
     [SerializeField] private Item item;
+    private GameObject modelRenderer;
+    private GameObject vfxRenderer;
+
+    private void Awake()
+    {
+        modelRenderer = Instantiate(item.Model, transform.position + new Vector3(0f, 0.5f, 0f), transform.rotation, gameObject.transform);
+        vfxRenderer = Instantiate(item.VfxDrop, transform.position, transform.rotation, gameObject.transform);
+    }
 
     public override void Interact(Transform player)
     {
@@ -15,12 +23,13 @@ public class ItemPickup : Interactable
     private void PickUp(Transform player)
     {
         int playerIndex = player.GetComponent<PlayerInputHandler>().GetPlayerIndex();
-        item.SetIndex(playerIndex);
-        item.SetPlayerOwner(player.GetComponent<Mover>());
+        item.PlayerIndex = playerIndex;
+        // item.SetIndex(playerIndex);
+        item.Owner = player.GetComponent<Mover>();
+        // item.SetPlayerOwner(player.GetComponent<Mover>());
 
         Inventory.Instance.Add(item, playerIndex);
 
-        this.gameObject.SetActive(false);
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

@@ -63,7 +63,6 @@ public class PauseMenu : MonoBehaviour
 
     private void Lose()
     {
-        Debug.Log("Game lost...");
         loseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -73,7 +72,6 @@ public class PauseMenu : MonoBehaviour
 
     private void Win()
     {
-        Debug.Log("Game won!");
         winMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -83,7 +81,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("Resumed game!");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -92,7 +89,6 @@ public class PauseMenu : MonoBehaviour
 
     private void Pause()
     {
-        Debug.Log("Paused game!");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -102,7 +98,6 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadPlayerSelect() // TODO: Combine this and LoadMainMenu()
     {
-        Debug.Log("Returning to player setup screen!");
         Time.timeScale = 1f;
 
         GameManager.Instance.ResetGameManager();
@@ -123,7 +118,6 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        Debug.Log("Returning to main menu!");
         Time.timeScale = 1f;
 
         GameManager.Instance.ResetGameManager();

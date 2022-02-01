@@ -39,8 +39,5 @@ public class BasicMovement : MonoBehaviour
             anim.SetBool("IsRunning", true);
         else
             anim.SetBool("IsRunning", false);
-
-        // anim.SetFloat("Horizontal", horizontal);
-        // anim.SetFloat("Vertical", vertical);
     }
 }

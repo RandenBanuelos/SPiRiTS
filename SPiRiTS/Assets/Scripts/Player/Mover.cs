@@ -286,7 +286,6 @@ public class Mover : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Enemy");
         Physics.IgnoreCollision(GetComponent<Collider>(), playerObj.GetComponent<Collider>());
 
-        Debug.Log("Got to the point.");
         manager.AddDeadPlayer(this);
     }
 }

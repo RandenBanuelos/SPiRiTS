@@ -15,6 +15,8 @@ MonoBehaviour:
   itemName: Balm
   description: An herbal balm that heals a miniscule amount of health.
   icon: {fileID: 21300000, guid: 77f099b5da1e44e4d986b23eae4db4dd, type: 3}
+  model: {fileID: 919132149155446097, guid: a27c1bea266ffa54cb1e50ceeecfa458, type: 3}
+  vfxDrop: {fileID: 4545355876133862483, guid: a3bc8afec20d6c54290f88dec47f7399, type: 3}
   cooldownTimer: 3
   isDefaultItem: 0
   healthRestored: 5
