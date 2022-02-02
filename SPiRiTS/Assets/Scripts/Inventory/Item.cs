@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Written by: Randen Banuelos
+
 /// <summary>
 /// Base class for specialized Item classes (e.g. HealingItem)
 /// </summary>
@@ -67,8 +69,7 @@ public class Item : ScriptableObject
     {
         get => owner;
         set => owner = value;
-    }
-    
+    } 
 
     /// <summary>
     /// A generalized Use function that is overridden depending on the subclass (e.g. HealingItem uses Use() to restore player health)
@@ -77,7 +78,6 @@ public class Item : ScriptableObject
     {
 
     }
-
 
     /// <summary>
     /// Removes one of this Item from a player's dictionary of items (determined by playerIndex) in the Inventory Instance singleton
