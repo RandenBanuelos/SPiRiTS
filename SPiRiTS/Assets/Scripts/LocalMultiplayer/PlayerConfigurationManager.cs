@@ -1,17 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+// Written by: Randen Banuelos
+// Based on Broken Knights Games' local multiplayer series using Unity's new Input System
+
+/// <summary>
+/// Handles the joining of players and configuration of player data, sent over from UI via singleton access
+/// </summary>
 public class PlayerConfigurationManager : MonoBehaviour
 {
     // VARIABLES
+    [SerializeField] private int MaxPlayers = 2;
+
+
+    // REFERENCES
     private List<PlayerConfiguration> playerConfigs;
     private PlayerInputManager inputManager;
-
-    [SerializeField] private int MaxPlayers = 2;
 
     // Singleton instance
     #region Singleton
@@ -34,6 +41,8 @@ public class PlayerConfigurationManager : MonoBehaviour
     }
     #endregion
 
+
+    // FUNCTIONS
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
         return playerConfigs;

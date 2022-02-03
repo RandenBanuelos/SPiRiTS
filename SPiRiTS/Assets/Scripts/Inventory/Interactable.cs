@@ -1,5 +1,11 @@
 using UnityEngine;
 
+// Written by: Randen Banuelos
+// Based on Brackeys' Inventory implementation in his Unity RPG series
+
+/// <summary>
+/// Base class for any interactible objects in the game (e.g. an ItemPickup)
+/// </summary>
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private float radius = 3f;

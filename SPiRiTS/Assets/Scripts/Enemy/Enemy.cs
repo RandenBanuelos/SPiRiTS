@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// Written by: Randen Banuelos
+
+/// <summary>
+/// Base class for all enemy types; includes statistics, health, and attack functionalities
+/// </summary>
 public class Enemy : MonoBehaviour
 {
     // VARIABLES

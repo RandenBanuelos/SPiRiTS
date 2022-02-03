@@ -1,6 +1,7 @@
 using UnityEngine;
 
 // Written by: Randen Banuelos
+// Based on Brackeys' Inventory implementation in his Unity RPG series
 
 /// <summary>
 /// Base class for specialized Item classes (e.g. HealingItem)

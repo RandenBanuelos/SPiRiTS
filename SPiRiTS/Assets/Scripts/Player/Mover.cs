@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Written by: Randen Banuelos
+// Based on Broken Knights Games' local multiplayer series using Unity's new Input System
+
+// TODO: Break this into more subclasses
+/// <summary>
+/// Primary Player class; handles player stats, movement, attacking, and health
+/// </summary>
 public class Mover : MonoBehaviour
 {
     // VARIABLES 

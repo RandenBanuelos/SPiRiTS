@@ -1,7 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Written by: Randen Banuelos
+// Based on Brackeys' implementation in his Multiple Target Camera tutorial
+
+/// <summary>
+/// Keeps all players in frame as best as possible
+/// </summary>
 [RequireComponent(typeof(Camera))]
 public class MultipleTargetCamera : MonoBehaviour
 {

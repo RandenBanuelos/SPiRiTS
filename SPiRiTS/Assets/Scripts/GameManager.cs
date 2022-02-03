@@ -1,7 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Written by: Randen Banuelos
+
+/// <summary>
+/// Tracks alive players/bosses, initiating a lose/win state if one of the two groups are all dead
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public delegate void OnAllPlayersDead();

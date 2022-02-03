@@ -1,5 +1,11 @@
 using UnityEngine;
 
+// Written by: Randen Banuelos
+// Based on Brackeys' Inventory implementation in his Unity RPG series
+
+/// <summary>
+/// Component for overworld collectibles
+/// </summary>
 public class ItemPickup : Interactable
 {
     [SerializeField] private Item item;
@@ -24,9 +30,7 @@ public class ItemPickup : Interactable
     {
         int playerIndex = player.GetComponent<PlayerInputHandler>().GetPlayerIndex();
         item.PlayerIndex = playerIndex;
-        // item.SetIndex(playerIndex);
         item.Owner = player.GetComponent<Mover>();
-        // item.SetPlayerOwner(player.GetComponent<Mover>());
 
         Inventory.Instance.Add(item, playerIndex);
 

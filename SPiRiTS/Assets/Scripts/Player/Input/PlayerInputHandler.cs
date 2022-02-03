@@ -1,23 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 using static UnityEngine.InputSystem.InputAction;
 
+// Written by: Randen Banuelos
+// Based on Broken Knights Games' local multiplayer series using Unity's new Input System
+
+/// <summary>
+/// Handles input from the Player Input component, sending messages over to the associated Mover component
+/// </summary>
 public class PlayerInputHandler : MonoBehaviour
 {
     // VARIABLES
-    private PlayerConfiguration playerConfig;
-    private Mover mover;
-
     [SerializeField] private SkinnedMeshRenderer playerMesh;
 
+
+    // REFERENCES
+    private PlayerConfiguration playerConfig;
+    private Mover mover;
     private PlayerControls controls;
 
 
     // FUNCTIONS
-
     private void Awake()
     {
         mover = GetComponent<Mover>();

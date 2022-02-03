@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Written by: Randen Banuelos
+// Based on Brackeys' implementation in his Melee Combat tutorial
+
+/// <summary>
+/// Handles the initiation of different types of attacks
+/// </summary>
 public class Combat : MonoBehaviour
 {
     // VARIABLES

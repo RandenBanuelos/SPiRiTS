@@ -1,37 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// Written by: Randen Banuelos
+// Based on Dave / GameDevelopment's implementation in his Enemy AI tutorial
+
+/// <summary>
+/// Controls NavMesh navigation and state changes for player detection
+/// </summary>
 public class EnemyAI : MonoBehaviour
 {
+    // VARIABLES
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Enemy enemyObject;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask playerLayer;
-    private Transform chasedPlayer;
 
     // Patrolling
     [SerializeField] private float walkPointRange;
-    [SerializeField] private float waitTime;
-    private Vector3 walkPoint;
-    private bool walkPointSet;
-    private bool canWalk = true;
+    [SerializeField] private float waitTime;  
 
     // Attacking
     [SerializeField] private float timeBetweenAttacks;
-    private bool attacking;
 
     // States
     [SerializeField] private float sightRange;
     [SerializeField] private float attackRange;
-    public bool playerInSightRange;
-    public bool playerInAttackRange;
+    [SerializeField] private bool playerInSightRange;
+    [SerializeField] private bool playerInAttackRange;
+
+    // REFERENCES
+    private Transform chasedPlayer;
+
+    private Vector3 walkPoint;
+    private bool walkPointSet;
+    private bool canWalk = true;
+
+    private bool attacking;
 
 
     // FUNCTIONS
-
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
