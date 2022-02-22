@@ -237,7 +237,15 @@ public class Mover : MonoBehaviour
     public void SetHUD(Canvas hud)
     {
         playerHUD = hud;
-        playerHUD.GetComponent<InventoryUI>().SetPlayerIndex(GetComponent<PlayerInputHandler>().GetPlayerIndex());
+        Debug.Log(playerHUD == null);
+
+        int index = GetComponent<PlayerInputHandler>().GetPlayerIndex();
+        Debug.Log(index);
+
+        InventoryUI test = playerHUD.GetComponent<InventoryUI>();
+        Debug.Log(test == null);
+
+        playerHUD.GetComponent<InventoryUI>().SetPlayerIndex(index);
         healthBar = playerHUD.GetComponentInChildren<HealthBar>();
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -317,6 +325,8 @@ public class Mover : MonoBehaviour
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
+                // Rotate the moveDirection vector slightly to account for the rotated angle of the camera
+                // Based on Jessy's solution from https://answers.unity.com/questions/46770/rotate-a-vector3-direction.html
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
                 // Moves the player, based on their direction and whether or not they are sprinting or not
