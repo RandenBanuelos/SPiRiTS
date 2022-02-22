@@ -14,7 +14,7 @@ public class InitializeLevel : MonoBehaviour
     /// <summary>
     /// Hosts all spawn points within the level
     /// </summary>
-    [SerializeField] private List<Transform> playerSpawns;
+    [SerializeField] private Transform[] playerSpawns;
 
     /// <summary>
     /// The player prefab to Instantiate for each derived player
@@ -68,7 +68,6 @@ public class InitializeLevel : MonoBehaviour
             hud.gameObject.SetActive(true);
 
             // Link this HUD to the player's Mover
-            Debug.Log($"InitializeLevel: {hud == null}");
             playerMover.SetHUD(hud);
 
             // Link the HUD's HealthBar to the Mover

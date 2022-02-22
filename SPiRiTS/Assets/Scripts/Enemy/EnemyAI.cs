@@ -137,15 +137,7 @@ public class EnemyAI : MonoBehaviour
         } 
 
         if (attacking)
-        {
-            // Prevents the enemy from tilting towards the ground while looking at the player (Playtest #1 Bug Fix)
-            // Based on Revolver2k's solution at https://answers.unity.com/questions/36255/lookat-to-only-rotate-on-y-axis-how.html
-
-            Vector3 targetPosition = new Vector3(chasedPlayer.position.x,
-                                        transform.position.y,
-                                        chasedPlayer.position.z);
-            transform.LookAt(targetPosition);
-        }
+            transform.LookAt(chasedPlayer);
     }
 
     /// <summary>
