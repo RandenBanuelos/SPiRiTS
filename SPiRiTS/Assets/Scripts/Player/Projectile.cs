@@ -5,6 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     /// <summary>
+    /// Stores the name of enemy layers
+    /// </summary>
+    [SerializeField] private string enemyLayerName = "Enemy";
+
+    /// <summary>
     /// Stores the layer given to enemies
     /// </summary>
     [SerializeField] private LayerMask enemyLayer;
@@ -43,10 +48,23 @@ public class Projectile : MonoBehaviour
     {
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
 
-        foreach (Collider enemy in hitEnemies)
+        Debug.Log($"Hit {hitEnemies.Length} {enemyLayer.ToString()}'s");
+
+        if (enemyLayer.ToString() == enemyLayerName) // Projectile shot by a player
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            foreach (Collider enemy in hitEnemies)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            }
         }
+        else // Projectile shot by an enemy
+        {
+            foreach (Collider enemy in hitEnemies)
+            {
+                enemy.GetComponent<Mover>().TakeDamage(attackDamage);
+            }
+        }
+        
     }
 
     /// <summary>

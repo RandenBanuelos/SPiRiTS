@@ -69,6 +69,10 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     private GameManager manager;
 
+    // Used to prevent accessing the Pause screen after winning or losing (Playtest #1 Bug Fix)
+    private bool gameLost = false;
+    private bool gameWon = false;
+
 
     // FUNCTIONS
     private void Awake()
@@ -110,9 +114,9 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     private void DeterminePause()
     {
-        if (GameIsPaused)
+        if (GameIsPaused && !gameLost && !gameWon)
             Resume();
-        else
+        else if (!gameLost && !gameWon)
             Pause();
     }
 
@@ -123,6 +127,7 @@ public class PauseMenu : MonoBehaviour
     {
         // Disable UI
         loseMenuUI.SetActive(true);
+        gameLost = true;
 
         // Freeze gameplay and set GameIsPaused
         Time.timeScale = 0f;
@@ -139,6 +144,7 @@ public class PauseMenu : MonoBehaviour
     {
         // Disable UI
         winMenuUI.SetActive(true);
+        gameWon = true;
 
         // Freeze gameplay and set GameIsPaused
         Time.timeScale = 0f;
