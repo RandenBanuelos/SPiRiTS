@@ -11,19 +11,46 @@ using UnityEngine;
 public class Combat : MonoBehaviour
 {
     // VARIABLES
+    /// <summary>
+    /// Stores the location of where attacks originate
+    /// </summary>
     [SerializeField] private Transform attackPoint;
+
+    /// <summary>
+    /// Stores what is considered an enemy
+    /// </summary>
     [SerializeField] private LayerMask enemyLayer;
 
+
+    /// <summary>
+    /// The range for melee attacks, originates from attackPoint
+    /// </summary>
     [SerializeField] private float attackRange = 0.5f;
+
+    /// <summary>
+    /// Attack damage stat
+    /// </summary>
     [SerializeField] private int attackDamage = 40;
 
+    /// <summary>
+    /// Speed at which ranged attack projectiles are launched
+    /// </summary>
     private float attackForce = 15f;
 
+    /// <summary>
+    /// Stores the hitbox for projectile
+    /// </summary>
     [SerializeField] private Rigidbody bullet;
+
+    /// <summary>
+    /// Bool value on whether to use melee or ranged combat
+    /// </summary>
     [SerializeField] private bool isRanged = false;
 
     // FUNCTIONS
-
+    /// <summary>
+    /// If player is not a ranged unit, use MeleeAttack,
+    /// </summary>
     public void Attack()
     {
         if (!isRanged)
@@ -36,6 +63,9 @@ public class Combat : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Instantiates a bullet, and "launches" it directly forward from the player's attackPoint
+    /// </summary>
     private void RangedAttack()
     {
         Rigidbody bulletInstance =
@@ -45,6 +75,9 @@ public class Combat : MonoBehaviour
         bulletInstance.velocity = attackForce * attackPoint.forward;
     }
 
+    /// <summary>
+    /// Finds enemies within player's attack range and deals damage to all enemies
+    /// </summary>
     private void MeleeAttack()
     {
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
@@ -59,6 +92,9 @@ public class Combat : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Draws attack ranges
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

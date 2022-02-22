@@ -43,24 +43,34 @@ public class PlayerConfigurationManager : MonoBehaviour
 
 
     // FUNCTIONS
+    /// <summary>
+    /// Returns the list of player configs
+    /// </summary>
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
         return playerConfigs;
     }
 
-
+    /// <summary>
+    /// Disables joining in the inputManager
+    /// </summary>
     public void DisableJoin()
     {
         inputManager.DisableJoining();
     }
 
-
+    /// <summary>
+    /// Enables joining in the inputManager
+    /// </summary>
     public void EnableJoin()
     {
         inputManager.EnableJoining();
     }
 
-
+    /// <summary>
+    /// Removes input from each playerConfig
+    /// Afterwards, clears list of playerConfigs
+    /// </summary>
     public void ResetSession()
     {
         for (int i = 0; i < playerConfigs.Count; i++)
@@ -71,13 +81,19 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs.Clear();
     }
 
-
+    /// <summary>
+    /// Sets the player's PlayerMaterial to a color
+    /// </summary>
     public void SetPlayerColor(int index, Material color)
     {
         playerConfigs[index].PlayerMaterial = color;
     }
 
-
+    /// <summary>
+    /// Sets the given player number to be ready
+    /// After, checks if all players are ready
+    /// If so, load in game scene
+    /// </summary>
     public void ReadyPlayer(int index)
     {
         playerConfigs[index].IsReady = true;
@@ -88,7 +104,10 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Handles player joining
+    /// If there are less players than the max limit and the player index is not already in the list of PlayerConfigs, add player to PlayerConfigs
+    /// </summary>
     public void HandlePlayerJoin(PlayerInput pi)
     {
         Debug.Log($"Player #{pi.playerIndex + 1} Joined! ({pi.currentControlScheme})");
