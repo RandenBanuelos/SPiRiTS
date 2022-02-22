@@ -102,7 +102,15 @@ public class Mover : MonoBehaviour
     public void SetHUD(Canvas hud)
     {
         playerHUD = hud;
-        playerHUD.GetComponent<InventoryUI>().SetPlayerIndex(GetComponent<PlayerInputHandler>().GetPlayerIndex());
+        Debug.Log(playerHUD == null);
+
+        int index = GetComponent<PlayerInputHandler>().GetPlayerIndex();
+        Debug.Log(index);
+
+        InventoryUI test = playerHUD.GetComponent<InventoryUI>();
+        Debug.Log(test == null);
+
+        playerHUD.GetComponent<InventoryUI>().SetPlayerIndex(index);
         healthBar = playerHUD.GetComponentInChildren<HealthBar>();
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -148,6 +156,10 @@ public class Mover : MonoBehaviour
             }
 
             moveDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
+
+            // Rotate the moveDirection vector slightly to account for the rotated angle of the camera
+            // Based on Jessy's solution from https://answers.unity.com/questions/46770/rotate-a-vector3-direction.html
+            moveDirection = Quaternion.AngleAxis(-45, Vector3.up) * moveDirection;
 
             if (moveDirection.magnitude >= 0.1f)
             {

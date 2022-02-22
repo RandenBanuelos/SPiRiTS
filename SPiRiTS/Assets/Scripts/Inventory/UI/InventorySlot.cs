@@ -124,8 +124,8 @@ public class InventorySlot : MonoBehaviour
     /// </summary>
     public void UseItem()
     {
-        // Check that the item is not on cooldown
-        if (canUse)
+        // Check that the item is not on cooldown and that the game is not paused (Playtest #1 Bug Fix)
+        if (canUse && !PauseMenu.GameIsPaused)
         {
             // Don't use an item if none is set
             if (item != null)

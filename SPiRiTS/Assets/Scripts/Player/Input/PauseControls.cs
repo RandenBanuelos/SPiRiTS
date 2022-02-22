@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player/PauseControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player/Input/PauseControls.inputactions'
 
 using System;
 using System.Collections;
@@ -199,17 +199,6 @@ public class @PauseControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e25a0c4b-0b5c-42b7-bbf3-baf4e0d5646e"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b9941517-ad97-4dac-b6e4-1ad095fd1cbf"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
@@ -227,17 +216,6 @@ public class @PauseControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""13d63d23-0c3b-486e-8d63-f6922f9dffec"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
