@@ -327,4 +327,14 @@ public class Enemy : MonoBehaviour
     {
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
     }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public int GetMaxhealth()
+    {
+        return maxHealth;
+    }
 }

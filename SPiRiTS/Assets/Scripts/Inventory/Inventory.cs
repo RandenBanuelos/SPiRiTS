@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Written by: Randen Banuelos
+// Written by: Randen Banuelos & Leo Paragili
 // Based on Brackeys' Inventory implementation in his Unity RPG series
 
 /// <summary>
