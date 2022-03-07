@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1527078066276483497, guid: 79870e044637d0b4b916ebd9a1a8fa0c, type: 3}
       propertyPath: isRanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1527078066276483499, guid: 79870e044637d0b4b916ebd9a1a8fa0c, type: 3}
       propertyPath: m_RootOrder
@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1527078066276484688, guid: 79870e044637d0b4b916ebd9a1a8fa0c, type: 3}
       propertyPath: m_Name
-      value: Barbarian
+      value: Barbarian Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1527078066276484688, guid: 79870e044637d0b4b916ebd9a1a8fa0c, type: 3}
       propertyPath: m_IsActive

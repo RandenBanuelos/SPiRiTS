@@ -36,7 +36,7 @@ public class Combat : MonoBehaviour
     /// <summary>
     /// Speed at which ranged attack projectiles are launched
     /// </summary>
-    private float attackForce = 15f;
+    [SerializeField] private float attackForce = 15f;
 
     /// <summary>
     /// Stores the hitbox for projectile
